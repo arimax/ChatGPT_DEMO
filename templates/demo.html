@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <title>demo</title>
+        <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/style.css')}}">
+        <script type="text/javascript" src="{{url_for('static',filename='js/demo.js')}}"></script>
+    </head>
+    <body>
+        <h1>DEMO</h1>
+        <div id="chat_history"></div>
+        <textarea id="prompt" name="prompt" placeholder=""></textarea>
+        <button onclick="chat()">送信</button>
+    </body>
+</html>
