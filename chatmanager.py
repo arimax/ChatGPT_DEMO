@@ -1,7 +1,6 @@
 import openai
 #↓KEYを発行して更新をお願いします。
-KEY = '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'
-openai.api_key = KEY
+KEY = 
 
 class ChatManager:
     #初期処理
