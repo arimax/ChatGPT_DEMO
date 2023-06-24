@@ -1,6 +1,6 @@
 import openai
 #↓KEYを発行して更新をお願いします。
-KEY = ''
+KEY = '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'
 openai.api_key = KEY
 
 class ChatManager:
@@ -33,4 +33,24 @@ class ChatManager:
         self.compose_message('user',prompt)
         result = self.get_response_from_api()
         return result.content
-    
+    #finetuningを行う
+    def finetuning(self,filename):
+        print(filename)
+        upload_response = openai.File.create(
+            file = open (filename,'rb'),
+            purpose='fine-tune'
+        )
+        print (upload_response)
+        fine_tuning_response = openai.FineTune.create(
+            model = 'davinci',
+            training_file = upload_response.id
+        )
+        print(fine_tuning_response)
+        return fine_tuning_response['id']
+    #finetuning状況チェック
+    def get_finetuning_list(self,finetuning_id):
+        fine_tune = openai.FineTune.retrive(finetuning_id)
+        if 'status' not in fine_tune:
+            print(f"Error: {fine_tune}")
+            return None
+        return fine_tune['status'], fine_tune.get('fine_tuned_model', None)

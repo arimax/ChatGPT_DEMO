@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<head>
+    <title>FineTuning</title>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/style.css')}}">
+    <script type="text/javascript" src="{{url_for('static',filename='js/finetuning.js')}}"></script>
+</head>
+<p>FineTuning用のファイルをアップロード（JSONL形式）</p>
+
+<input type="file" name="file" id="fine_tuing_upload" onchange="uploadFineTuning()">
+
+<p>Fine Tuning状況確認</p>
+<input type="text" id="tuning_id" name="tuning_id" placeholder="">
+<button onclick="getFinetuningStatus()">状況確認</button>
+</html>
