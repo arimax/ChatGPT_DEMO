@@ -5,21 +5,19 @@ function uploadFineTuning() {
     }
     const file = document.getElementById("fine_tuing_upload").files[0];
     console.log("upload finetuning file")
-    const formData = new FormData();
+    let formData = new FormData();
     formData.append('file',file);
 
-    const url = 'http://localhost:8000/finetuning'
+    const url = 'http://chatgpt-demo-202306241241-env.eba-ecdhhqj6.ap-northeast-1.elasticbeanstalk.com/finetuning'
 
     const promise = fetch(url,{method: 'POST',body: formData});
     promise.then(response => {
         if (response.status != 200) {
             throw `response.status = ${response.status}, response.statusText = ${response.statusText}`;
         }
-        alert("アップロード成功しました。")
-        return response.json();
     })
     .then(jsondata => {
-        console.log("Result: " +JSON.stringfy(jsondata))
+        console.log("Result is : " +jsondata)
     }).catch(err => {
         console.log("Error :"+ err)
     })

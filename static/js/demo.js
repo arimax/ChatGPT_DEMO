@@ -14,10 +14,10 @@ function addMessage (prompt,response) {
 }
 function chat() {
     const prompt = document.getElementById('prompt');
-    const params = new URLSearchParams();
+    let params = new URLSearchParams();
     params.append('prompt', prompt.value);
-
-    fetch('http://localhost:8000/demo',{
+    console.log('POST'+ params);
+    fetch('http://chatgpt-demo-202306241241-env.eba-ecdhhqj6.ap-northeast-1.elasticbeanstalk.com/demo',{
         method: 'POST',
         body: params,
     })

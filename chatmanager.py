@@ -1,15 +1,17 @@
 import openai
-#↓KEYを発行して更新をお願いします。
-KEY = 
+
+#KEY
+KEY = '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'
+openai.api_key = KEY
 
 class ChatManager:
-    #初期処理
+    #init
     def __init__(self) :
         self.model = 'gpt-3.5-turbo'
-        self.messages = [{'role': 'system', 'content': 'あなたは旅行に詳しいです。'}]
+        self.messages = [{'role': 'system', 'content': 'you are agent'}]
         self.params = {}
         self.setup_params()
-    #メッセージを設定
+    #set message
     def compose_message(self, role, content):
         self.messages.append({'role':role, 'content':content})
     #パラメータを設定
@@ -34,17 +36,14 @@ class ChatManager:
         return result.content
     #finetuningを行う
     def finetuning(self,filename):
-        print(filename)
         upload_response = openai.File.create(
             file = open (filename,'rb'),
             purpose='fine-tune'
         )
-        print (upload_response)
         fine_tuning_response = openai.FineTune.create(
             model = 'davinci',
             training_file = upload_response.id
         )
-        print(fine_tuning_response)
         return fine_tuning_response['id']
     #finetuning状況チェック
     def get_finetuning_list(self,finetuning_id):
@@ -52,4 +51,4 @@ class ChatManager:
         if 'status' not in fine_tune:
             print(f"Error: {fine_tune}")
             return None
-        return fine_tune['status'], fine_tune.get('fine_tuned_model', None)
+        return fine_tune
