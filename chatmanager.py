@@ -1,7 +1,7 @@
 import openai
 
 #KEY
-KEY = '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'
+KEY = ''
 openai.api_key = KEY
 
 class ChatManager:
